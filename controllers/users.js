@@ -107,5 +107,6 @@ export const getProfile = (req, res) => {
       success: false,
       message: '發生錯誤'
     })
+    console.log(error)
   }
 }
