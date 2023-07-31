@@ -83,6 +83,7 @@ export const extend = async (req, res) => {
       result: token
     })
   } catch (error) {
+    console.log(error)
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       success: false,
       message: '發生錯誤'
@@ -98,11 +99,13 @@ export const getProfile = (req, res) => {
       result: {
         account: req.user.account,
         email: req.user.email,
-        role: req.user.role,
-        cart: req.user.cart.reduce((total, current) => total + current.quantity, 0)
+        phoneNumber: req.user.phoneNumber,
+        role: req.user.role
+        // cart: req.user.cart.reduce((total, current) => total + current.quantity, 0)
       }
     })
   } catch (error) {
+    console.log(error)
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       success: false,
       message: '發生錯誤'

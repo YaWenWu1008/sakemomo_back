@@ -49,6 +49,8 @@ passport.use('jwt', new passportJWT.Strategy({
     }
     return done(null, { user, token })
   } catch (error) {
+    console.log(error)
+    console.log(payload)
     if (error.message === 'EXPIRED') {
       return done(null, false, { message: '登入逾時' })
     } else if (error.message === 'NO USER') {

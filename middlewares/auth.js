@@ -21,6 +21,7 @@ export const login = (req, res, next) => {
 export const jwt = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (error, data, info) => {
     if (error || !data) {
+      console.log(error)
       if (info instanceof jsonwebtoken.JsonWebTokenError) {
         return res.status(StatusCodes.UNAUTHORIZED).json({
           success: false,
