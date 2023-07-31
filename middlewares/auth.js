@@ -3,7 +3,7 @@ import jsonwebtoken from 'jsonwebtoken'
 import { StatusCodes } from 'http-status-codes'
 
 export const login = (req, res, next) => {
-  passport.authenticate('login', { sesstion: false }, (error, user, info) => {
+  passport.authenticate('login', { session: false }, (error, user, info) => {
     if (error || !user) {
       if (info.message === 'Missing credentials') {
         info.message = '欄位錯誤'
