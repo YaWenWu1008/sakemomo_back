@@ -51,7 +51,7 @@ app.use((_, req, res, next) => {
 app.use(mongoSanitize())
 
 app.use('/users', routeUsers)
-app.use('/menus', routeProducts)
+app.use('/products', routeProducts)
 
 app.all('*', (req, res) => {
   res.status(StatusCodes.NOT_FOUND).json({

@@ -22,7 +22,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: [true, '缺少分類'],
     enum: {
-      values: ['餐點', '酒類', '無酒精'],
+      values: ['開胃小食', '生食&沙拉', '酒桃塔可', '燒物', '揚物', '食事&吸物', '甜點', '夜場限定', '酒'],
       message: '分類錯誤'
     }
   },
