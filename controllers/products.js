@@ -98,6 +98,7 @@ export const getId = async (req, res) => {
       result
     })
   } catch (error) {
+    console.log(error)
     if (error.name === 'CastError') {
       res.status(StatusCodes.BAD_REQUEST).json({
         success: false,
