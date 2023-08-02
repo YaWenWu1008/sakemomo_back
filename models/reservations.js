@@ -27,7 +27,7 @@ const reservationSchema = new mongoose.Schema({
 const schema = new mongoose.Schema({
   user: {
     type: mongoose.ObjectId,
-    ref: [reservationSchema]
+    ref: { reservationSchema }
   }
 })
 
