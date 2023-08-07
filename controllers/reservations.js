@@ -5,26 +5,37 @@ import { getMessageFromValidationError } from '../utils/error.js'
 
 export const create = async (req, res) => {
   try {
-    const { name, phoneNumber, peopleNumber, date, time } = req.body
-    const user = await users.findById(req.user._id, 'reservation')
-    if (req.user.reservations === 0) {
-      throw new Error('EMPTY')
-    }
-    const reservation = await reservations.create({
-      name,
-      phoneNumber,
-      peopleNumber,
-      date,
-      time,
-      user: user._id
-    })
-    user.reservations -= 1
-    await user.save()
+    // const { name, phoneNumber, peopleNumber, dateTime } = req.body
+    // const user = await users.findById(req.user._id, 'reservation')
+    // if (req.user.reservations === 0) {
+    //   throw new Error('EMPTY')
+    // }
+    // const reservation = await reservations.create({
+    //   name,
+    //   phoneNumber,
+    //   peopleNumber,
+    //   dateTime,
+    //   user: user._id
+    // })
+    // user.reservations -= 1
+    // await user.save()
 
-    return res.status(StatusCodes.CREATED).json({
+    // return res.status(StatusCodes.CREATED).json({
+    //   success: true,
+    //   message: '訂位成功',
+    //   reservation
+    // })
+    const result = await reservations.create({
+      name: req.body.name,
+      phoneNumber: req.body.phoneNumber,
+      peopleNumber: req.body.peopleNumber,
+      dateTime: req.body.dateTime,
+      user: req.body._id
+    })
+    res.status(StatusCodes.OK).json({
       success: true,
-      message: '訂位成功',
-      reservation
+      message: '',
+      result
     })
   } catch (error) {
     if (error.message === 'EMPTY') {
