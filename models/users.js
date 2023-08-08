@@ -13,18 +13,13 @@ const reservationSchema = new mongoose.Schema({
     required: [true, '電話必填']
   },
   peopleNumber: {
-    type: String,
+    type: Number,
     required: true
   },
-  date: {
-    type: Date,
-    required: true
-  },
-  time: {
+  dateTime: {
     type: String,
     required: true
   }
-
 }, { versionKey: false })
 
 const schema = new mongoose.Schema({

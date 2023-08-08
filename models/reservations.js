@@ -10,25 +10,31 @@ const reservationSchema = new mongoose.Schema({
     required: [true, '電話必填']
   },
   peopleNumber: {
-    type: String,
+    type: Number,
     required: true
   },
-  date: {
-    type: Date,
-    required: true
-  },
-  time: {
+  dateTime: {
     type: String,
     required: true
   }
-
 }, { versionKey: false })
 
 const schema = new mongoose.Schema({
   user: {
     type: mongoose.ObjectId,
-    ref: { reservationSchema }
+    ref: 'users',
+    required: [true, '缺少使用者']
+  },
+  reservation: {
+    type: [reservationSchema],
+    default: [],
+    validate: {
+      validator(value) {
+        return Array.isArray(value) && value.length > 0
+      },
+      message: '訂位不能為空'
+    }
   }
-})
+}, { versionKey: false })
 
 export default mongoose.model('reservations', schema)

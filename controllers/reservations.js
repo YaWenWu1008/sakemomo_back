@@ -5,27 +5,10 @@ import { getMessageFromValidationError } from '../utils/error.js'
 
 export const create = async (req, res) => {
   try {
-    // const { name, phoneNumber, peopleNumber, dateTime } = req.body
-    // const user = await users.findById(req.user._id, 'reservation')
-    // if (req.user.reservations === 0) {
-    //   throw new Error('EMPTY')
-    // }
-    // const reservation = await reservations.create({
-    //   name,
-    //   phoneNumber,
-    //   peopleNumber,
-    //   dateTime,
-    //   user: user._id
-    // })
-    // user.reservations -= 1
-    // await user.save()
-
-    // return res.status(StatusCodes.CREATED).json({
-    //   success: true,
-    //   message: '訂位成功',
-    //   reservation
-    // })
+    const user = await users.findById(req.user._id)
     const result = await reservations.create({
+
+      id: user._id,
       name: req.body.name,
       phoneNumber: req.body.phoneNumber,
       peopleNumber: req.body.peopleNumber,
