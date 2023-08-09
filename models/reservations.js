@@ -1,6 +1,11 @@
 import mongoose from 'mongoose'
 
-const reservationSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
+  user: {
+    type: mongoose.ObjectId,
+    ref: 'users',
+    required: [true, '缺少使用者']
+  },
   name: {
     type: String,
     required: [true, '姓名必填']
@@ -17,24 +22,7 @@ const reservationSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-}, { versionKey: false })
 
-const schema = new mongoose.Schema({
-  user: {
-    type: mongoose.ObjectId,
-    ref: 'users',
-    required: [true, '缺少使用者']
-  },
-  reservation: {
-    type: [reservationSchema],
-    default: [],
-    validate: {
-      validator(value) {
-        return Array.isArray(value) && value.length > 0
-      },
-      message: '訂位不能為空'
-    }
-  }
 }, { versionKey: false })
 
 export default mongoose.model('reservations', schema)

@@ -1,19 +1,16 @@
-import reservation from '../models/reservations'
-import users from '../models/users.js'
+import reservation from '../models/reservations.js'
+// import users from '../models/users.js'
 import { StatusCodes } from 'http-status-codes'
 import { getMessageFromValidationError } from '../utils/error.js'
 
 export const create = async (req, res) => {
   try {
-    const user = await users.findById(req.user._id)
     const result = await reservation.create({
-
-      id: user._id,
       name: req.body.name,
       phoneNumber: req.body.phoneNumber,
       peopleNumber: req.body.peopleNumber,
       dateTime: req.body.dateTime,
-      user: req.body._id
+      user: req.user._id
     })
     res.status(StatusCodes.OK).json({
       success: true,
@@ -21,6 +18,7 @@ export const create = async (req, res) => {
       result
     })
   } catch (error) {
+    console.log(error)
     if (error.message === 'EMPTY') {
       res.status(StatusCodes.BAD_REQUEST).json({
         success: false,
@@ -42,7 +40,7 @@ export const create = async (req, res) => {
 
 export const get = async (req, res) => {
   try {
-    const result = await reservations.find({ user: req.user._id }).populate('reservation')
+    const result = await reservation.find({ user: req.user._id }).populate('reservation')
     res.status(StatusCodes.OK).json({
       success: true,
       message: '',
@@ -58,7 +56,7 @@ export const get = async (req, res) => {
 
 export const getAll = async (req, res) => {
   try {
-    const result = await reservations.find().populate('reservation').populate('user', 'account')
+    const result = await reservation.find().populate('reservation').populate('user', 'account')
     res.status(StatusCodes.OK).json({
       success: true,
       message: '',
@@ -74,7 +72,7 @@ export const getAll = async (req, res) => {
 
 export const getId = async (req, res) => {
   try {
-    const result = await reservations.findById(req.params.id)
+    const result = await reservation.findById(req.params.id)
     if (!result) {
       throw new Error('NOT FOUND')
     }
@@ -106,7 +104,7 @@ export const getId = async (req, res) => {
 
 export const edit = async (req, res) => {
   try {
-    const result = await reservations.findByIdAndUpdate(req.params.id, {
+    const result = await reservation.findByIdAndUpdate(req.params.id, {
       name: req.body.name,
       price: req.body.price,
       phoneNumber: req.body.phoneNumber,
@@ -150,7 +148,7 @@ export const edit = async (req, res) => {
 
 export const cancel = async (req, res) => {
   try {
-    const reservation = await reservations.findById(req.params.id)
+    const reservation = await reservation.findById(req.params.id)
     if (!reservation) {
       return res.status(StatusCodes.NOT_FOUND).json({
         success: false,

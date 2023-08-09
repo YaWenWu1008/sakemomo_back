@@ -7,6 +7,7 @@ import { rateLimit } from 'express-rate-limit'
 import cors from 'cors'
 import routeUsers from './routes/users.js'
 import routeProducts from './routes/products.js'
+import routeReservation from './routes/reservations.js'
 import './passport/passport.js'
 
 const app = express()
@@ -52,6 +53,7 @@ app.use(mongoSanitize())
 
 app.use('/users', routeUsers)
 app.use('/products', routeProducts)
+app.use('/reservation', routeReservation)
 
 app.all('*', (req, res) => {
   res.status(StatusCodes.NOT_FOUND).json({
