@@ -3,25 +3,6 @@ import validator from 'validator'
 import bcrypt from 'bcrypt'
 import UserRole from '../enums/UserRole.js'
 
-const reservationSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, '姓名必填']
-  },
-  phoneNumber: {
-    type: String,
-    required: [true, '電話必填']
-  },
-  peopleNumber: {
-    type: Number,
-    required: true
-  },
-  dateTime: {
-    type: String,
-    required: true
-  }
-}, { versionKey: false })
-
 const schema = new mongoose.Schema({
   account: {
     type: String,
@@ -50,10 +31,7 @@ const schema = new mongoose.Schema({
     type: [String],
     default: []
   },
-  reservation: {
-    type: [reservationSchema],
-    default: []
-  },
+
   role: {
     type: Number,
     default: UserRole.USER
