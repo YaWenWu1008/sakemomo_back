@@ -1,4 +1,4 @@
-import reservations from '../models/reservations'
+import reservation from '../models/reservations'
 import users from '../models/users.js'
 import { StatusCodes } from 'http-status-codes'
 import { getMessageFromValidationError } from '../utils/error.js'
@@ -6,7 +6,7 @@ import { getMessageFromValidationError } from '../utils/error.js'
 export const create = async (req, res) => {
   try {
     const user = await users.findById(req.user._id)
-    const result = await reservations.create({
+    const result = await reservation.create({
 
       id: user._id,
       name: req.body.name,

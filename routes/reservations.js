@@ -5,7 +5,7 @@ import { create, get, getAll } from '../controllers/reservations'
 
 const router = express.Router()
 
-router.post('/', auth.jwt, create)
+router.post('/users/reservation', create)
 router.get('/', auth.jwt, get)
 router.get('/all', auth.jwt, admin, getAll)
 
