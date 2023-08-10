@@ -8,9 +8,9 @@ const router = express.Router()
 
 router.post('/', contentType('application/json'), create)
 router.post('/login', contentType('application/json'), auth.login, login)
-router.delete('/logout', auth.jwt, logout)
 router.patch('/extend', auth.jwt, extend)
 router.get('/me', auth.jwt, getProfile)
 router.get('/all', auth.jwt, admin, getAll)
+router.delete('/logout', auth.jwt, logout)
 
 export default router
