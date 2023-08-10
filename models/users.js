@@ -27,6 +27,11 @@ const schema = new mongoose.Schema({
       message: '信箱格式錯誤'
     }
   },
+  phoneNumber: {
+    type: String,
+    required: [true, '手機號碼必填'],
+    match: [/^09\d{8}$/, '手機格式錯誤']
+  },
   tokens: {
     type: [String],
     default: []

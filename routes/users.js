@@ -1,6 +1,7 @@
 import express from 'express'
 import contentType from '../middlewares/contentType.js'
-import { create, login, logout, extend, getProfile } from '../controllers/users.js'
+import admin from '../middlewares/admin.js'
+import { create, login, logout, extend, getProfile, getAll } from '../controllers/users.js'
 import * as auth from '../middlewares/auth.js'
 
 const router = express.Router()
@@ -10,5 +11,6 @@ router.post('/login', contentType('application/json'), auth.login, login)
 router.delete('/logout', auth.jwt, logout)
 router.patch('/extend', auth.jwt, extend)
 router.get('/me', auth.jwt, getProfile)
+router.get('/all', auth.jwt, admin, getAll)
 
 export default router

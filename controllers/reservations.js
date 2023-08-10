@@ -55,7 +55,7 @@ export const get = async (req, res) => {
 
 export const getAll = async (req, res) => {
   try {
-    const result = await reservation.find().populate('reservation/all')
+    const result = await reservation.find().populate('user')
     res.status(StatusCodes.OK).json({
       success: true,
       message: '',
