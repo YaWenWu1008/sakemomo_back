@@ -102,6 +102,24 @@ export const updateConfirmation = async (req, res) => {
   }
 }
 
+export const getReservation = async (req, res) => {
+  try {
+    const result = await reservation.findById(req.user._id, 'reservation')
+    console.log(result)
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: '',
+      result: result.reservation
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: '發生錯誤'
+    })
+  }
+}
+
 // export const getId = async (req, res) => {
 //   try {
 //     const result = await reservation.findById(req.params.id)
