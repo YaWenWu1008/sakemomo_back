@@ -1,7 +1,7 @@
 import express from 'express'
 import contentType from '../middlewares/contentType.js'
 import admin from '../middlewares/admin.js'
-import { create, login, logout, extend, getProfile, getAll } from '../controllers/users.js'
+import { create, login, logout, extend, getProfile, getAll, getReservation } from '../controllers/users.js'
 import * as auth from '../middlewares/auth.js'
 
 const router = express.Router()
@@ -12,5 +12,6 @@ router.patch('/extend', auth.jwt, extend)
 router.get('/me', auth.jwt, getProfile)
 router.get('/all', auth.jwt, admin, getAll)
 router.delete('/logout', auth.jwt, logout)
+router.get('/reservation', auth.jwt, getReservation)
 
 export default router
