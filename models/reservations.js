@@ -21,6 +21,10 @@ const schema = new mongoose.Schema({
   dateTime: {
     type: String,
     required: true
+  },
+  confirmed: {
+    type: Boolean,
+    default: false
   }
 
 }, { versionKey: false })

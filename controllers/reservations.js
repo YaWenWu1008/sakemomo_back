@@ -69,6 +69,39 @@ export const getAll = async (req, res) => {
   }
 }
 
+export const updateConfirmation = async (req, res) => {
+  try {
+    const { id } = req.params
+    const { confirmed } = req.body
+
+    const reservations = await reservation.findByIdAndUpdate(
+      id,
+      { confirmed },
+      { new: true } // 返回更新后的文档
+    )
+
+    if (!reservations) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        success: false,
+        message: '找不到'
+      })
+    }
+
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: '已確認訂位',
+      result: {
+        confirmed: reservations.confirmed
+      }
+    })
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: '發生錯誤'
+    })
+  }
+}
+
 // export const getId = async (req, res) => {
 //   try {
 //     const result = await reservation.findById(req.params.id)
