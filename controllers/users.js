@@ -102,7 +102,6 @@ export const getProfile = (req, res) => {
         email: req.user.email,
         phoneNumber: req.user.phoneNumber,
         role: req.user.role
-        // cart: req.user.cart.reduce((total, current) => total + current.quantity, 0)
       }
     })
   } catch (error) {
@@ -130,17 +129,16 @@ export const getAll = async (req, res) => {
   }
 }
 
-export const getReservation = async (req, res) => {
+export const get = async (req, res) => {
   try {
-    const result = await users.findById(req.user._id, 'reservation')
-    console.log(result)
+    const result = await users.find({ user: req.user._id }).populate('user')
     res.status(StatusCodes.OK).json({
       success: true,
       message: '',
-      result: result.reservation
+      result
     })
   } catch (error) {
-    console.log(error)
+    console.error('Error in create:', error)
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       success: false,
       message: '發生錯誤'
