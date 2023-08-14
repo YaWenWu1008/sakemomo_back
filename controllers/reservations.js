@@ -39,13 +39,14 @@ export const create = async (req, res) => {
 
 export const get = async (req, res) => {
   try {
-    const result = await reservation.find({ user: req.user._id }).populate('reservation')
+    const result = await reservation.find({ user: req.user._id }).populate('user')
     res.status(StatusCodes.OK).json({
       success: true,
       message: '',
       result
     })
   } catch (error) {
+    console.error('Error in create:', error)
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       success: false,
       message: '發生錯誤'
@@ -77,7 +78,7 @@ export const updateConfirmation = async (req, res) => {
     const reservations = await reservation.findByIdAndUpdate(
       id,
       { confirmed },
-      { new: true } // 返回更新后的文档
+      { new: true }
     )
 
     if (!reservations) {
@@ -95,24 +96,8 @@ export const updateConfirmation = async (req, res) => {
       }
     })
   } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      success: false,
-      message: '發生錯誤'
-    })
-  }
-}
+    console.error('Error in create:', error)
 
-export const getReservation = async (req, res) => {
-  try {
-    const result = await reservation.findById(req.user._id, 'reservation')
-    console.log(result)
-    res.status(StatusCodes.OK).json({
-      success: true,
-      message: '',
-      result: result.reservation
-    })
-  } catch (error) {
-    console.log(error)
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       success: false,
       message: '發生錯誤'
