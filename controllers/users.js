@@ -131,11 +131,10 @@ export const getAll = async (req, res) => {
 
 export const get = async (req, res) => {
   try {
-    const result = await users.find({ user: req.user._id }).populate('user')
     res.status(StatusCodes.OK).json({
       success: true,
       message: '',
-      result
+      result: 
     })
   } catch (error) {
     console.error('Error in create:', error)
