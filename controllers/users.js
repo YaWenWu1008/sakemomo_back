@@ -128,19 +128,3 @@ export const getAll = async (req, res) => {
     })
   }
 }
-
-export const get = async (req, res) => {
-  try {
-    res.status(StatusCodes.OK).json({
-      success: true,
-      message: '',
-      result: 
-    })
-  } catch (error) {
-    console.error('Error in create:', error)
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      success: false,
-      message: '發生錯誤'
-    })
-  }
-}
