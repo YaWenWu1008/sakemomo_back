@@ -12,6 +12,5 @@ router.patch('/extend', auth.jwt, extend)
 router.get('/me', auth.jwt, getProfile)
 router.get('/all', auth.jwt, admin, getAll)
 router.delete('/logout', auth.jwt, logout)
-// router.get('/', auth.jwt, get)
 
 export default router
